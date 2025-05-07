@@ -43,7 +43,7 @@ void salvare_notita_in_fisier(Note notita)
     FILE *file=fopen(FISIER,"a");
     if(!file)
     {
-        printf("Eroare la deschiderea fisierului in salvare_notita_in_fisier");
+        printf(""ANSI_RED"Eroare la deschiderea fisierului in salvare_notita_in_fisier"ANSI_RESET"");
         return;
     }
     fprintf(file,"%02d.%02d.%04d %02d:%02d %s\n",notita.day,notita.month,notita.year,notita.hour, notita.minute, notita.text);
@@ -66,7 +66,7 @@ void scriere_notita()
 
         if (result != 5)
         {
-            printf(" " ANSI_RED  "Format invalid."ANSI_RESET" \n Te rog foloseste formatul: zz.ll.aaaa hh:mm\n");
+            printf(" " ANSI_RED  "Format invalid."ANSI_RESET" Te rog foloseste formatul: zz.ll.aaaa hh:mm\n");
             while (getchar() != '\n'); // curata buffer
             continue;
         }
@@ -77,7 +77,7 @@ void scriere_notita()
             new_note.hour < 0 || new_note.hour > 23 ||
             new_note.minute < 0 || new_note.minute > 59)
         {
-            printf(" Data sau ora invalida. Te rog introdu valori corecte.\n");
+            printf(" "ANSI_RED"Data sau ora invalida. Te rog introdu valori corecte."ANSI_RESET"\n");
         }
         else
         {
@@ -90,7 +90,7 @@ void scriere_notita()
     new_note.text[strcspn(new_note.text, "\n")] = 0;
 
     salvare_notita_in_fisier(new_note);
-    printf(" Notita a fost salvata cu succes!\n");
+    printf(" "ANSI_GREEN"Notita a fost salvata cu succes!"ANSI_RESET"\n");
 }
 
 ///varianta fara fisier
@@ -150,7 +150,7 @@ void edit_note()
     FILE *temp = fopen("temp.txt", "w");
     if (!file || !temp)
     {
-        printf(" Eroare la accesarea fisierului.\n");
+        printf(" "ANSI_RED"Eroare la accesarea fisierului."ANSI_RESET"\n");
         return;
     }
 
@@ -181,9 +181,9 @@ void edit_note()
     rename("temp.txt", FISIER);
 
     if (found)
-        printf(" Notita a fost editata cu succes.\n");
+        printf(" "ANSI_GREEN"Notita a fost editata cu succes."ANSI_RESET"\n");
     else
-        printf(" Nu a fost gasita nicio notita la data si ora specificata.\n");
+        printf(" "ANSI_RED"Nu a fost gasita nicio notita la data si ora specificata."ANSI_RESET"\n");
 }
 
 
